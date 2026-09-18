@@ -19,6 +19,8 @@ Then £283.6m drops out, because it is not spend anyone in procurement can influ
 - £50m to HMRC
 - £51m in pension contributions
 
+I reviewed the excluded payees by hand rather than trusting the keyword filter. Two were correctly excluded but wrongly labelled: Prudential, which is employees' own pension contributions passed through, and the Department for Work and Pensions, which the word "pension" caught by coincidence. Neither changed the total, but both changed what I could honestly say about it.
+
 That leaves £338.3m of real supplier spend. Everything below is measured against that number, not the headline £622m.
 
 This matters more than it sounds. Anyone reading the published file at face value would size the opportunity at nearly twice what exists.
@@ -27,7 +29,7 @@ This matters more than it sounds. Anyone reading the published file at face valu
 
 The file has 2,406 different supplier names across 2,409 vendor records. After matching on VAT registration number, there are 2,314 actual companies. So 95 vendor records are duplicate registrations of a supplier the council already had, and 69 companies appear under more than one spelling.
 
-Matching on VAT rather than on name caught things name-matching would miss, where the same legal entity is set up twice under different trading names.
+Matching on VAT rather than name caught things no name-matching would. BT and EE share a VAT registration, so four vendor records including "EE Ltd (Airtime)" and "British Telecommunications Ltd" are one counterparty. HC-One appears six times, once per care home. Both matter for procurement: telecoms and residential care both look more fragmented than they are.
 
 One thing worth flagging, because it nearly went unnoticed: a vendor record often carries a VAT number on some invoices and leaves it blank on others. My first attempt keyed those rows differently and split single suppliers in two, which pushed the supplier count up instead of down. I resolve one VAT number per vendor record first, then apply it across all of that record's rows.
 
@@ -69,6 +71,8 @@ Three suppliers are still sitting in the addressable base that I am not certain 
 
 59% of rows have no VAT number even after resolution, so the supplier matching is better than name matching but not complete.
 
+VAT matching has a weakness I found while checking the output. Council-maintained schools share their local authority's VAT registration, so several Manchester and Stockport schools were grouped into their councils. Legally right, analytically wrong. A production version would treat schools separately.
+
 I have not put a savings figure on any of this. Sizing an opportunity needs benchmark rates I do not have and could not source, and an invented percentage would be worse than no percentage.
 
 This is one council, one year, from a published file. It is not an audit.
@@ -81,5 +85,3 @@ python spend_cube_mvp.py
 ```
 
 Download the FY2025-26 file from data.gov.uk and put it in `data/`. It is not included here.
-
-Note: I reviewed the excluded payees by hand rather than trusting the keyword filter. Two were correctly excluded but wrongly labelled: Prudential, which is employees' own pension contributions passed through, and the Department for Work and Pensions, which the word "pension" caught by coincidence. Neither changed the total, but both changed what I could honestly say about it.
