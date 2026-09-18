@@ -81,3 +81,5 @@ python spend_cube_mvp.py
 ```
 
 Download the FY2025-26 file from data.gov.uk and put it in `data/`. It is not included here.
+
+Note: I reviewed the excluded payees by hand rather than trusting the keyword filter. Two were correctly excluded but wrongly labelled: Prudential, which is employees' own pension contributions passed through, and the Department for Work and Pensions, which the word "pension" caught by coincidence. Neither changed the total, but both changed what I could honestly say about it.
